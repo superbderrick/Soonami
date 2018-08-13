@@ -6,7 +6,7 @@
 
 .gradle/*
 .idea/*
-
+local.properties
 # BlueJ files
 *.ctxt
 
