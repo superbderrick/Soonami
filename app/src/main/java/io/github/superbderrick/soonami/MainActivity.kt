@@ -5,8 +5,16 @@ import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
 
+    /** Tag for the log messages  */
+    val LOG_TAG = this.javaClass.simpleName
+
+    /** URL to query the USGS dataset for earthquake information  */
+    private val USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2012-01-01&endtime=2012-12-01&minmagnitude=6"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+
 }
