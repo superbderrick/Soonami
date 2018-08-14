@@ -18,22 +18,38 @@ import java.net.URL
 import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 
+/**
+ * Displays information about a single earthquake.
+ */
 class MainActivity : AppCompatActivity() {
 
-    /** Tag for the log messages  */
-    val LOG_TAG = this.javaClass.simpleName
-
-    /** URL to query the USGS dataset for earthquake information  */
-    private val USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2012-01-01&endtime=2012-12-01&minmagnitude=6"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Kick off an {@link AsyncTask} to perform the network request
         var task = TsunamiAsyncTask()
         task.execute()
     }
 
+    /**
+     * Update the screen to display information from the given [Event].
+     */
+    private fun updateUi(earthquake: Event) {
+
+        // Display the earthquake title in the UI
+        val titleTextView = findViewById(R.id.title) as TextView?
+        titleTextView!!.text = earthquake.title
+
+        // Display the earthquake date in the UI
+        val dateTextView = findViewById(R.id.date) as TextView?
+        dateTextView!!.text = getDateString(earthquake.time)
+
+        // Display whether or not there was a tsunami alert in the UI
+        val tsunamiTextView = findViewById(R.id.tsunami_alert) as TextView?
+        tsunamiTextView!!.text = getTsunamiAlertString(earthquake.tsunamiAlert)
+    }
 
     private inner class TsunamiAsyncTask : AsyncTask<URL, Void, Event>() {
         override fun doInBackground(vararg urls: URL): Event? {
@@ -59,19 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun updateUi(earthquake: Event) {
-        // Display the earthquake title in the UI
-        val titleTextView = findViewById(R.id.title) as TextView?
-        titleTextView!!.text = earthquake.title
 
-        // Display the earthquake date in the UI
-        val dateTextView = findViewById(R.id.date) as TextView?
-        dateTextView!!.text = getDateString(earthquake.time)
-
-        // Display whether or not there was a tsunami alert in the UI
-        val tsunamiTextView = findViewById(R.id.tsunami_alert) as TextView?
-        tsunamiTextView!!.text = getTsunamiAlertString(earthquake.tsunamiAlert)
-    }
 
     /**
      * Returns a formatted date and time string for when the earthquake happened.
@@ -165,6 +169,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         return null
+    }
+
+    companion object {
+
+        /** Tag for the log messages  */
+        val LOG_TAG = this.javaClass.simpleName
+
+        /** URL to query the USGS dataset for earthquake information  */
+        private val USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2012-01-01&endtime=2012-12-01&minmagnitude=6"
+
     }
 
 }
