@@ -10,7 +10,7 @@
 
 
 ### Demo
-![demo](https://github.com/superbderrick/Soonami/blob/starting-point/demo/demo.png)
+![demo](https://github.com/superbderrick/Soonami/blob/starting-point/demo/demo.png | width=100)
 
 
 
