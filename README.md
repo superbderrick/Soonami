@@ -1,6 +1,6 @@
 # Soonami with kotlin 
 
-### Simple android earthquake information app which is to know how to get data from server side based on http protocol and show data with android basic API jsonobject,Asynctask,url connection something like.. 
+Simple android earthquake information app which is to know how to get data from server side based on http protocol and show data with android basic API jsonobject,Asynctask,url connection something like.. 
 
 - API : https://earthquake.usgs.gov/fdsnws/event/1/
 
